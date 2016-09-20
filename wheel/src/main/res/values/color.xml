@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 点歌 -->
+    <color name="mpre_time">#422769</color>
+    <color name="mpre_center">#311f4c</color>
+	<color name="transport">#00000000</color>
+    <color name="back_color">#ffffff</color>
+</resources>

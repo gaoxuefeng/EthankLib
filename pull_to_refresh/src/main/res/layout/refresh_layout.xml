@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<in.srain.cube.views.loadmore.LoadMoreListViewContainer xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/load_more_contain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cube_mints_white">
+
+    <ListView
+        android:id="@+id/load_more_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:footerDividersEnabled="false"
+        android:listSelector="@android:color/transparent"
+        android:overScrollMode="never"
+        android:scrollbars="none" />
+
+</in.srain.cube.views.loadmore.LoadMoreListViewContainer>
+
