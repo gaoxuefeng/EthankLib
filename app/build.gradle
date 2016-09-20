@@ -3,6 +3,9 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.2"
+    lintOptions {
+        abortOnError false
+    }
     defaultConfig {
         applicationId "ethank.com.cn.ethanklib"
         minSdkVersion 15

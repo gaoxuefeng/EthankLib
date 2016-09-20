@@ -1,46 +1,9 @@
 apply plugin: 'com.android.library'
-// 根节点添加
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
-// 根节点添加
-version = "0.1"
+version = "1.0.0"
 def libs = rootProject.ext.libraries;
 def cfg = rootProject.ext.configuration
-// 根节点添加
-group = " cn.com.ethank.coyotelib"
-def siteUrl = 'https://github.com/gaoxuefeng'                        // #CONFIG# // project homepage
-def gitUrl = 'https://github.com/gaoxuefeng'
-// 根节点添加
-install {
-    repositories.mavenInstaller {
-        // This generates POM.xml with proper parameters
-        pom {
-            project {
-                packaging 'aar'
-                name 'coyotelib baseLib For Ethank'
-                url siteUrl
-                licenses {
-                    license {
-                        name 'The Apache Software License, Version 2.0'
-                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                    }
-                }
-                developers {
-                    developer {
-                        id 'gaoxuefeng'
-                        name 'Gao Xuefeng'
-                        email '1072820194@qq.com'
-                    }
-                }
-                scm {
-                    connection gitUrl
-                    developerConnection gitUrl
-                    url siteUrl
-                }
-            }
-        }
-    }
-}
 android {
     compileSdkVersion cfg.compileVersion
     buildToolsVersion cfg.buildToolsVersion
@@ -51,10 +14,8 @@ android {
     defaultConfig {
         minSdkVersion cfg.minSdk
         targetSdkVersion cfg.targetSdk
-
-//        ndk {
-//            moduleName "ETHANKENCRYPT"
-//        }
+        versionCode 1
+        versionName version
     }
 
     buildTypes {
@@ -74,39 +35,68 @@ dependencies {
     compile "com.squareup.retrofit2:retrofit:2.0.0-beta4"
     compile "com.alibaba:fastjson:${libs.fastjson}"
 }
+def siteUrl = 'https://github.com/gaoxuefeng/EthankLib' // 项目的主页
+def gitUrl = 'https://github.com/gaoxuefeng/EthankLib.git' // Git仓库的url
+group = "cn.com.ethank.coyotelib" // Maven Group ID for the artifact，一般填你唯一的包名
+
+install {
+    repositories.mavenInstaller {
+        // This generates POM.xml with proper parameters
+        pom {
+            project {
+                packaging 'aar'
+                // Add your description here
+                name 'a lib for utils' //项目描述
+                url siteUrl
+                // Set your license
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'gaoxuefeng'    //填写的一些基本信息
+                        name 'gaoxuefeng'
+                        email '1072820194@qq.com'
+                    }
+                }
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+                }
+            }
+        }
+    }
+}
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
     classifier = 'sources'
 }
-
 task javadoc(type: Javadoc) {
+    options.encoding = 'UTF-8'
     source = android.sourceSets.main.java.srcDirs
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
 }
-
 task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
     from javadoc.destinationDir
 }
-
 artifacts {
-    // archives javadocJar
+//    archives javadocJar
     archives sourcesJar
 }
-
 Properties properties = new Properties()
-boolean isHasFile = false
-if (project.rootProject.findProject('local.properties') != null){
-    isHasFile = true
-    properties.load(project.rootProject.file('local.properties').newDataInputStream())
-}
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
 bintray {
-    user = isHasFile ? properties.getProperty("bintray.user") : System.getenv("bintray.user")
-    key = isHasFile ? properties.getProperty("bintray.apikey") : System.getenv("bintray.apikey")
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
     configurations = ['archives']
     pkg {
         repo = "maven"
-        name = "coyotelib"                                                 // #CONFIG# project name in jcenter
+        name = "coyotelib"    //发布到JCenter上的项目名字
         websiteUrl = siteUrl
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]
