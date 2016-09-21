@@ -1,7 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'com.jfrog.bintray'
-version = "1.0.0"
 def libs = rootProject.ext.libraries;
 def cfg = rootProject.ext.configuration
 android {
@@ -15,7 +12,7 @@ android {
         minSdkVersion cfg.minSdk
         targetSdkVersion cfg.targetSdk
         versionCode 1
-        versionName version
+        versionName "1.0.0"
     }
 
     buildTypes {
@@ -35,10 +32,11 @@ dependencies {
     compile "com.squareup.retrofit2:retrofit:2.0.0-beta4"
     compile "com.alibaba:fastjson:${libs.fastjson}"
 }
-def siteUrl = 'https://github.com/gaoxuefeng/EthankLib' // 项目的主页
-def gitUrl = 'https://github.com/gaoxuefeng/EthankLib.git' // Git仓库的url
-group = "cn.com.ethank.coyotelib" // Maven Group ID for the artifact，一般填你唯一的包名
-
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+def siteUrl = 'https://github.com/gaoxuefeng/EthankLib'
+def gitUrl = 'https://github.com/gaoxuefeng/EthankLib.git'
+version = "1.0.0"
 install {
     repositories.mavenInstaller {
         // This generates POM.xml with proper parameters
@@ -46,7 +44,7 @@ install {
             project {
                 packaging 'aar'
                 // Add your description here
-                name 'a lib for utils' //项目描述
+                name 'a lib for Android Project' //项目描述
                 url siteUrl
                 // Set your license
                 licenses {
@@ -58,8 +56,8 @@ install {
                 developers {
                     developer {
                         id 'gaoxuefeng'    //填写的一些基本信息
-                        name 'gaoxuefeng'
-                        email '1072820194@qq.com'
+                        name 'Gao Xuefeng'
+                        email '107820194@qq.com'
                     }
                 }
                 scm {
@@ -76,7 +74,6 @@ task sourcesJar(type: Jar) {
     classifier = 'sources'
 }
 task javadoc(type: Javadoc) {
-    options.encoding = 'UTF-8'
     source = android.sourceSets.main.java.srcDirs
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
 }
@@ -96,10 +93,12 @@ bintray {
     configurations = ['archives']
     pkg {
         repo = "maven"
-        name = "coyotelib"    //发布到JCenter上的项目名字
+        name = "coyoteLib"    //发布到JCenter上的项目名字
         websiteUrl = siteUrl
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]
         publish = true
     }
 }
+
+
