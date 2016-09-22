@@ -1,7 +1,11 @@
 # EthankLib
 本项目是自己一些项目中用过的lib组合而成的,也有一些github 上的项目经过本地化适配或者优化后上传的
-
-
+项目引用:
+compile 'cn.com.ethank.ethanklib:coyoteLib:1.0.0'
+compile 'cn.com.ethank.ethanklib:hotelviewpagerlibrary:1.0.0'
+compile 'cn.com.ethank.ethanklib:pull_to_refresh:1.0.0'
+compile 'cn.com.ethank.ethanklib:social_sdk_library_project:1.0.0'
+compile 'cn.com.ethank.ethanklib:wheel:1.0.0'
 #下面介绍一下如何上传lib 到 jenter
     1.首先 打开https://bintray.com/网站注册一个账号或者直接用github账号登录
     2.在"Owned Repositories"下面点加号创建一个叫maven的仓库
